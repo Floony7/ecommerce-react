@@ -1,4 +1,4 @@
-import { CategoryCard, CategoryBody, CategoryImage } from "../category.styles";
+import { CategoryCard, CategoryBody, CategoryImage } from "./category.styles";
 
 export type Category = {
   id: number;
@@ -6,7 +6,7 @@ export type Category = {
   imageURL: string;
 };
 
-const CategoryItem = (props: { category: Category }) => {
+export const CategoryItem = (props: { category: Category }) => {
   const { id, title, imageURL } = props.category;
   return (
     <CategoryCard key={id}>
@@ -18,5 +18,3 @@ const CategoryItem = (props: { category: Category }) => {
     </CategoryCard>
   );
 };
-
-export default CategoryItem;
