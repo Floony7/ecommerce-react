@@ -1,4 +1,4 @@
-import { CategoryItem, Category } from "../category/category-item";
+import CategoryItem, { Category } from "../category/category-item";
 import { CategoriesContainer } from "./category-directory.styles";
 
 // Have one unifying category and then Keywords for mor eprecise filtering

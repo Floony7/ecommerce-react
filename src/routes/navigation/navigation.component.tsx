@@ -13,6 +13,7 @@ const Navigation = () => {
         </LogoContainer>
         <NavLinks>
           <Link to="/shop">Shop</Link>
+          <Link to="/sign-in">Sign In</Link>
         </NavLinks>
       </Navbar>
       <Outlet />

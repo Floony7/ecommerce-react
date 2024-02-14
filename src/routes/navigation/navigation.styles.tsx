@@ -21,9 +21,14 @@ export const Navbar = styled.div`
   a {
     font-weight: 600;
     font-size: 1.2rem;
+    color: var(--clr-sky-blue);
 
     &:hover {
-      color: mediumturquoise;
+      color: var(--clr-magenta);
+    }
+
+    &:not(:last-child) {
+      margin-right: 1rem;
     }
   }
 `;
