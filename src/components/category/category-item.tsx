@@ -6,7 +6,7 @@ export type Category = {
   imageURL: string;
 };
 
-export const CategoryItem = (props: { category: Category }) => {
+const CategoryItem = (props: { category: Category }) => {
   const { id, title, imageURL } = props.category;
   return (
     <CategoryCard key={id}>
@@ -18,3 +18,5 @@ export const CategoryItem = (props: { category: Category }) => {
     </CategoryCard>
   );
 };
+
+export default CategoryItem;

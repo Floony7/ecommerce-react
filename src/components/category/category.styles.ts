@@ -30,9 +30,9 @@ export const CategoryBody = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: 1px solid black;
-    background-color: white;
-    opacity: 0.7;
+    border: 2px solid darkslategray;
+    color: darkslategray;
+    background-color: rgba(255, 255, 255, 0.8);
     position: absolute;
 
     h2 {
