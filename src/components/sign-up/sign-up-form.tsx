@@ -1,28 +1,39 @@
 import React, { useState } from "react";
 import { Button } from "../../shared-styles/button";
-import { Form, Label, PageWrap } from "./sign-up-form.styles";
+import { ErrorList, Form, Label, PageWrap } from "./sign-up-form.styles";
+import {
+  createAuthUserWithEmailAndPassword,
+  createUserDocument,
+} from "../../utils/firebase/firebase.utils";
+import { AuthError } from "firebase/auth";
 
-interface FormFields {
-  displayName: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-}
-
-const initialFormState = {
+const defaultFormState = {
   displayName: "",
   email: "",
   password: "",
   confirmPassword: "",
 };
 
-const SignUpForm = () => {
-  const [formFields, setFormFields] = useState<FormFields>(initialFormState);
-  const { displayName, email, password, confirmPassword } = formFields;
+type FormFields = typeof defaultFormState;
 
-  const handleSubmit = (e: React.FormEvent) => {
+const SignUpForm = () => {
+  const [formFields, setFormFields] = useState<FormFields>(defaultFormState);
+  const { displayName, email, password, confirmPassword } = formFields;
+  const [error, setError] = useState<string[]>([]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("FORM_FIELDS", formFields);
+    if (password !== confirmPassword) {
+      return;
+    }
+
+    try {
+      const res = await createAuthUserWithEmailAndPassword(email, password);
+      console.log("RES", res);
+      await createUserDocument(res?.user, { displayName });
+    } catch (error) {
+      setError((prev) => [...prev, (error as AuthError).message]);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,6 +44,13 @@ const SignUpForm = () => {
   return (
     <PageWrap>
       <Form onSubmit={handleSubmit}>
+        {error ? (
+          <ErrorList>
+            {error.map((err) => (
+              <li>{removeFirebasePrefix(err)}</li>
+            ))}
+          </ErrorList>
+        ) : null}
         <Label htmlFor="displayName">Display name</Label>
         <input
           value={displayName}
@@ -72,3 +90,7 @@ const SignUpForm = () => {
 };
 
 export default SignUpForm;
+
+function removeFirebasePrefix(str: string): string {
+  return str.replace(/^Firebase: /, "Error: ");
+}

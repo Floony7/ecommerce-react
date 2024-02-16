@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { initializeApp } from "firebase/app";
-import {getAuth, signInWithPopup, GoogleAuthProvider} from "firebase/auth";
+import {getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword} from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -13,6 +13,7 @@ const firebaseConfig = {
   };
 
   // Initialise Firebase
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const firebaseApp = initializeApp(firebaseConfig);
 
 const provider = new GoogleAuthProvider();
@@ -26,7 +27,7 @@ export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
 
 export const db = getFirestore();
 
-export const createUserDocument = async (userAuth: any) => {
+export const createUserDocument = async (userAuth: any, additionalInfo = {}) => {
     const userDocRef = doc(db, 'users', userAuth.uid);
     const userSnapshot = await getDoc(userDocRef);
     console.log(userSnapshot.exists());
@@ -38,7 +39,8 @@ export const createUserDocument = async (userAuth: any) => {
             await setDoc(userDocRef, {
                 displayName,
                 email, 
-                createdAt
+                createdAt,
+                ...additionalInfo
             })
         } catch (error: any) {
             console.log(`Error creating user ${error.message}`)
@@ -46,4 +48,10 @@ export const createUserDocument = async (userAuth: any) => {
     }
 
     return userDocRef;
+}
+
+export const createAuthUserWithEmailAndPassword = async (email: string, password: string) => {
+    if (!email || ! password) return;
+
+    return await createUserWithEmailAndPassword(auth, email, password);
 }

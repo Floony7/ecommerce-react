@@ -28,3 +28,10 @@ export const Form = styled.form`
 export const Label = styled.label`
     font-weight: 600;
 `;
+
+export const ErrorList = styled.ul`
+    background-color: rgba(200, 0, 0, 0.4);
+    list-style: none;
+    padding: 0.5rem;
+    border-radius: 3px;
+`;

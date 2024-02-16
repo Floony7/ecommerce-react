@@ -1,24 +1,34 @@
 import { Outlet, Link } from "react-router-dom";
 import IceStoreLogo from "../../assets/icestore-logo.svg";
-import { LogoContainer, Main, NavLinks, Navbar } from "./navigation.styles";
+import {
+  LogoContainer,
+  Main,
+  NavInner,
+  NavLinks,
+  Navbar,
+} from "./navigation.styles";
 
 const Navigation = () => {
   return (
-    <Main>
+    <div>
       <Navbar>
-        <LogoContainer>
-          <Link to="/">
-            <img src={IceStoreLogo} width={250} />
-          </Link>
-        </LogoContainer>
-        <NavLinks>
-          <Link to="/shop">Shop</Link>
-          <Link to="/sign-in">Sign In</Link>
-          {/* <Link to="/sign-up">Sign Up</Link> */}
-        </NavLinks>
+        <NavInner>
+          <LogoContainer>
+            <Link to="/">
+              <img src={IceStoreLogo} width={250} />
+            </Link>
+          </LogoContainer>
+          <NavLinks>
+            <Link to="/shop">Shop</Link>
+            <Link to="/sign-in">Sign In</Link>
+            {/* <Link to="/sign-up">Sign Up</Link> */}
+          </NavLinks>
+        </NavInner>
       </Navbar>
-      <Outlet />
-    </Main>
+      <Main>
+        <Outlet />
+      </Main>
+    </div>
   );
 };
 

@@ -13,10 +13,22 @@ export const LogoContainer = styled.div`
 LogoContainer.displayName = "LogoContainer";
 
 export const Navbar = styled.div`
+  padding: 0.5rem 2rem;
+  background-color: hsl(0, 0%, 83%);
+`;
+
+Navbar.displayName = "Navbar";
+
+export const NavLinks = styled.nav`
+  margin-right: 2rem;
+`;
+
+export const NavInner = styled.section`
+  width: 90vw;
+  margin-inline: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem 2rem;
 
   a {
     font-weight: 600;
@@ -33,8 +45,4 @@ export const Navbar = styled.div`
   }
 `;
 
-Navbar.displayName = "Navbar";
-
-export const NavLinks = styled.nav`
-  margin-right: 2rem;
-`;
+NavInner.displayName = "NavInner";

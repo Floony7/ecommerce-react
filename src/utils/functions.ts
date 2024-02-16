@@ -1,3 +1,4 @@
+import { AuthError } from "firebase/auth";
 
 export function rgbToHex(r: number, g: number, b: number): string {
     const clamp = (value: number) => Math.max(0, Math.min(255, value));
@@ -8,3 +9,10 @@ export function rgbToHex(r: number, g: number, b: number): string {
   
       return `${toHex(r)}${toHex(g)}${toHex(b)}`;
   }
+
+export function processError(error: AuthError) {
+    const code = error.code;
+    const cleanCodeString = code.replace(/[^-]/g, " ");
+    return `${cleanCodeString.charAt(0).toUpperCase()}${cleanCodeString.slice(1)}`  
+}
+
