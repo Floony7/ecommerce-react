@@ -29,8 +29,9 @@ const SignUpForm = () => {
 
     try {
       const res = await createAuthUserWithEmailAndPassword(email, password);
-      console.log("RES", res);
       await createUserDocument(res?.user, { displayName });
+      setError([]);
+      setFormFields(defaultFormState);
     } catch (error) {
       setError((prev) => [...prev, (error as AuthError).message]);
     }
@@ -44,7 +45,7 @@ const SignUpForm = () => {
   return (
     <PageWrap>
       <Form onSubmit={handleSubmit}>
-        {error ? (
+        {error.length > 0 ? (
           <ErrorList>
             {error.map((err) => (
               <li>{removeFirebasePrefix(err)}</li>
@@ -92,5 +93,5 @@ const SignUpForm = () => {
 export default SignUpForm;
 
 function removeFirebasePrefix(str: string): string {
-  return str.replace(/^Firebase: /, "Error: ");
+  return str.replace(/^Firebase: /, "");
 }
