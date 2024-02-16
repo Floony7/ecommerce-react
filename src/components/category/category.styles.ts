@@ -7,7 +7,7 @@ export const CategoryCard = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid hsl(200, 80%, 30%);
+    border: 2px solid hsl(200, 80%, 30%); 
     margin: 0 8px 16px;
     overflow: hidden;
 

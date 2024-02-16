@@ -4,6 +4,6 @@ export const CategoriesContainer = styled.section`
     width: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+    gap: 0;
     margin-top: 2rem;
 `;
