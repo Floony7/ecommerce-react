@@ -1,38 +1,41 @@
 import React, { useState } from "react";
 import Button from "../button/button.component";
-import { SignUpSection } from "./sign-up-form.styles";
 import { Form, Label, ErrorList } from "../../shared-styles/forms";
+import { ButtonContainer, SignInSection } from "./sign-in-form.styles";
+import { BUTTON_TYPES } from "../../types";
 import {
-  createAuthUserWithEmailAndPassword,
   createUserDocument,
+  signInWithGooglePopup,
+  signInUserWithEmailAndPassword,
 } from "../../utils/firebase/firebase.utils";
 import { AuthError } from "firebase/auth";
 
 const defaultFormState = {
-  displayName: "",
   email: "",
   password: "",
-  confirmPassword: "",
 };
 
 type FormFields = typeof defaultFormState;
 
-const SignUpForm = () => {
+const SignInForm = () => {
   const [formFields, setFormFields] = useState<FormFields>(defaultFormState);
-  const { displayName, email, password, confirmPassword } = formFields;
+  const { email, password } = formFields;
   const [error, setError] = useState<string[]>([]);
+
+  const signInWithGoogle = async () => {
+    const { user } = await signInWithGooglePopup();
+    await createUserDocument(user);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
+    if (!password) {
       return;
     }
 
     try {
-      const res = await createAuthUserWithEmailAndPassword(email, password);
-      await createUserDocument(res?.user, { displayName });
-      setError([]);
-      setFormFields(defaultFormState);
+      const res = await signInUserWithEmailAndPassword(email, password);
+      console.log(res);
     } catch (error) {
       setError((prev) => [...prev, (error as AuthError).message]);
     }
@@ -44,24 +47,17 @@ const SignUpForm = () => {
   };
 
   return (
-    <SignUpSection>
-      <h2>Sign up with email and password</h2>
+    <SignInSection>
+      <h2>Already have an account?</h2>
+      <span>Sign in with email and password</span>
       <Form onSubmit={handleSubmit}>
         {error.length > 0 ? (
           <ErrorList>
             {error.map((err) => (
-              <li key={Math.random()}>{removeFirebasePrefix(err)}</li>
+              <li>{err}</li>
             ))}
           </ErrorList>
         ) : null}
-        <Label htmlFor="displayName">Display name</Label>
-        <input
-          value={displayName}
-          onChange={handleChange}
-          name="displayName"
-          type="text"
-          required
-        />
         <Label htmlFor="email">Email</Label>
         <input
           value={email}
@@ -78,22 +74,15 @@ const SignUpForm = () => {
           type="password"
           required
         />
-        <Label htmlFor="confirm">Confirm password</Label>
-        <input
-          value={confirmPassword}
-          onChange={handleChange}
-          name="confirmPassword"
-          type="password"
-          required
-        />
-        <Button type="submit">Sign Up</Button>
+        <ButtonContainer>
+          <Button type="submit">Sign in</Button>
+          <Button onClick={signInWithGoogle} buttonType={BUTTON_TYPES.GOOGLE}>
+            Sign in with Google
+          </Button>
+        </ButtonContainer>
       </Form>
-    </SignUpSection>
+    </SignInSection>
   );
 };
 
-export default SignUpForm;
-
-function removeFirebasePrefix(str: string): string {
-  return str.replace(/^Firebase: /, "");
-}
+export default SignInForm;
