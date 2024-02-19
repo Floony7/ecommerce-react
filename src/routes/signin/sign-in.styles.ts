@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const PageWrap = styled.section`
+export const SignInSection = styled.section`
     display: flex;
     flex-direction: column;
     align-items: center;

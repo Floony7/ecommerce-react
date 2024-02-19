@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Button } from "../../shared-styles/button";
-import { ErrorList, Form, Label, PageWrap } from "./sign-up-form.styles";
+import Button from "../button/button.component";
+import { ErrorList, Form, Label, SignUpSection } from "./sign-up-form.styles";
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocument,
@@ -43,7 +43,7 @@ const SignUpForm = () => {
   };
 
   return (
-    <PageWrap>
+    <SignUpSection>
       <Form onSubmit={handleSubmit}>
         {error.length > 0 ? (
           <ErrorList>
@@ -86,7 +86,7 @@ const SignUpForm = () => {
         />
         <Button type="submit">Sign Up</Button>
       </Form>
-    </PageWrap>
+    </SignUpSection>
   );
 };
 

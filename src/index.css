@@ -13,10 +13,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  /* --clr-sea-green: hsl(300, 50%, 0%); */
   --clr-sea-green: hsl(150, 50%, 50%);
   --clr-sky-blue: hsl(207, 82%, 41%);
-  --clr-dark-blue: hsl(237, 82%, 41%);
+  --clr-dark-blue: hsl(220, 70%, 50%);
   --clr-purple: hsl(267, 82%, 41%);
   --clr-magenta: hsl(297, 82%, 41%);
   --clr-crimson: hsl(327, 82%, 41%);
