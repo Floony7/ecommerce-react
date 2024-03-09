@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const CategoryCard = styled.div`
     min-width: 30%;
-    height: 240px;
+    min-height: 240px;
     flex: 1 1 auto;
     display: flex;
     align-items: center;
@@ -25,25 +25,28 @@ export const CategoryImage = styled.div`
 
 export const CategoryBody = styled.div`
     height: 90px;
+    width: 250px;
     padding: 0 25px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: 2px solid darkslategray;
-    color: darkslategray;
-    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid var(--clr-magenta);
+    color: white;
+    background-color: hsla(270, 50%, 30%, 50%);
     position: absolute;
 
-    h2 {
+    h3 {
       font-weight: bold;
-      margin: 0 6px 0;
+      margin: 0;
       font-size: 22px;
-      color: #4a4a4a;
+      padding: 0;
     }
 
     p {
       font-weight: lighter;
       font-size: 16px;
+      padding: 0;
+      margin-top: 0;
     }
 `;

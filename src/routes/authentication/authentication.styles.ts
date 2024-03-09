@@ -1,7 +1,19 @@
 import styled from 'styled-components';
 
 export const AuthenticationSection = styled.section`
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    min-height: 100vh;
+    display: flex;
+    justify-content: space-between;
+    max-width: 960px;
+    margin: 2rem auto;
+
+    @media (max-width: 920px) {
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    * {
+        width: 90%;
+    }
+  }
+
 `;

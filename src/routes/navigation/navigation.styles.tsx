@@ -8,13 +8,14 @@ export const Main = styled.main`
 export const LogoContainer = styled.div`
   display: flex;
   align-items: center;
+  gap: 1rem;
 `;
 
 LogoContainer.displayName = "LogoContainer";
 
 export const Navbar = styled.div`
   padding: 0.5rem 2rem;
-  background-color: hsl(0, 0%, 83%);
+  background-color: var(--clr-purple);
 `;
 
 Navbar.displayName = "Navbar";
@@ -33,10 +34,10 @@ export const NavInner = styled.section`
   a {
     font-weight: 600;
     font-size: 1.2rem;
-    color: var(--clr-sky-blue);
+    color: white;
 
     &:hover {
-      color: var(--clr-magenta);
+      opacity: 0.8;
     }
 
     &:not(:last-child) {

@@ -9,6 +9,7 @@ import {
   signInUserWithEmailAndPassword,
 } from "../../utils/firebase/firebase.utils";
 import { AuthError } from "firebase/auth";
+import { removeFirebasePrefix } from "../../utils/functions";
 
 const defaultFormState = {
   email: "",
@@ -20,7 +21,7 @@ type FormFields = typeof defaultFormState;
 const SignInForm = () => {
   const [formFields, setFormFields] = useState<FormFields>(defaultFormState);
   const { email, password } = formFields;
-  const [error, setError] = useState<string[]>([]);
+  const [errors, setErrors] = useState<string[]>([]);
 
   const signInWithGoogle = async () => {
     const { user } = await signInWithGooglePopup();
@@ -36,8 +37,14 @@ const SignInForm = () => {
     try {
       const res = await signInUserWithEmailAndPassword(email, password);
       console.log(res);
-    } catch (error) {
-      setError((prev) => [...prev, (error as AuthError).message]);
+      setErrors([]);
+      setFormFields(defaultFormState);
+    } catch (err) {
+      const message = (err as AuthError).message;
+      if (errors.some((error) => error === message)) {
+        return;
+      }
+      setErrors((prev) => [...prev, message]);
     }
   };
 
@@ -51,10 +58,10 @@ const SignInForm = () => {
       <h2>Already have an account?</h2>
       <span>Sign in with email and password</span>
       <Form onSubmit={handleSubmit}>
-        {error.length > 0 ? (
+        {errors.length > 0 ? (
           <ErrorList>
-            {error.map((err) => (
-              <li>{err}</li>
+            {errors.map((err, idx) => (
+              <li key={idx}>{removeFirebasePrefix(err)}</li>
             ))}
           </ErrorList>
         ) : null}
@@ -76,7 +83,11 @@ const SignInForm = () => {
         />
         <ButtonContainer>
           <Button type="submit">Sign in</Button>
-          <Button onClick={signInWithGoogle} buttonType={BUTTON_TYPES.GOOGLE}>
+          <Button
+            type="button"
+            onClick={signInWithGoogle}
+            buttonType={BUTTON_TYPES.GOOGLE}
+          >
             Sign in with Google
           </Button>
         </ButtonContainer>

@@ -16,3 +16,7 @@ export function processError(error: AuthError) {
     return `${cleanCodeString.charAt(0).toUpperCase()}${cleanCodeString.slice(1)}`  
 }
 
+export function removeFirebasePrefix(str: string): string {
+    return str.replace(/^Firebase: /, "");
+  }
+  

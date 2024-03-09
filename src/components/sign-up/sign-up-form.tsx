@@ -7,6 +7,7 @@ import {
   createUserDocument,
 } from "../../utils/firebase/firebase.utils";
 import { AuthError } from "firebase/auth";
+import { removeFirebasePrefix } from "../../utils/functions";
 
 const defaultFormState = {
   displayName: "",
@@ -93,7 +94,3 @@ const SignUpForm = () => {
 };
 
 export default SignUpForm;
-
-function removeFirebasePrefix(str: string): string {
-  return str.replace(/^Firebase: /, "");
-}

@@ -1,5 +1,6 @@
 import { Outlet, Link } from "react-router-dom";
-import IceStoreLogo from "../../assets/icestore-logo.svg";
+import IceStoreLogo2 from "../../assets/icestore-logo2.svg";
+import Banner from "../../assets/icestoreuk.png";
 import {
   LogoContainer,
   Main,
@@ -15,7 +16,10 @@ const Navigation = () => {
         <NavInner>
           <LogoContainer>
             <Link to="/">
-              <img src={IceStoreLogo} width={250} />
+              <img src={IceStoreLogo2} height={60} />
+            </Link>
+            <Link to="/">
+              <img src={Banner} height={60} />
             </Link>
           </LogoContainer>
           <NavLinks>
