@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import { Outlet, Link } from "react-router-dom";
+import { signOutUser } from "../../utils/firebase/firebase.utils";
 import IceStoreLogo2 from "../../assets/icestore-logo2.svg";
 import Banner from "../../assets/icestoreuk.png";
 import {
@@ -8,8 +10,17 @@ import {
   NavLinks,
   Navbar,
 } from "./navigation.styles";
+import { UserContext } from "../../contexts/user.context";
 
 const Navigation = () => {
+  const { currentUser, setCurrentUser } = useContext(UserContext);
+  console.log(currentUser);
+
+  const handleSignOut = async () => {
+    await signOutUser();
+    setCurrentUser(null);
+  };
+
   return (
     <div>
       <Navbar>
@@ -24,7 +35,14 @@ const Navigation = () => {
           </LogoContainer>
           <NavLinks>
             <Link to="/shop">Shop</Link>
-            <Link to="/auth">Sign In</Link>
+            {currentUser ? (
+              <span className="nav-link" onClick={handleSignOut}>
+                Sign Out
+              </span>
+            ) : (
+              <Link to="/auth">Sign In</Link>
+            )}
+
             {/* <Link to="/sign-up">Sign Up</Link> */}
           </NavLinks>
         </NavInner>
