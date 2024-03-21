@@ -13,13 +13,12 @@ import {
 import { UserContext } from "../../contexts/user.context";
 
 const Navigation = () => {
-  const { currentUser, setCurrentUser } = useContext(UserContext);
+  const { currentUser } = useContext(UserContext);
   console.log(currentUser);
-
-  const handleSignOut = async () => {
-    await signOutUser();
-    setCurrentUser(null);
-  };
+  // const handleSignOut = async () => {
+  //   await signOutUser();
+  //   setCurrentUser(null);
+  // };
 
   return (
     <div>
@@ -36,7 +35,7 @@ const Navigation = () => {
           <NavLinks>
             <Link to="/shop">Shop</Link>
             {currentUser ? (
-              <span className="nav-link" onClick={handleSignOut}>
+              <span className="nav-link" onClick={signOutUser}>
                 Sign Out
               </span>
             ) : (

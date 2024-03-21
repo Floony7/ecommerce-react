@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { initializeApp } from "firebase/app";
-import {getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} from "firebase/auth";
+import {getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged} from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -30,7 +30,7 @@ export const db = getFirestore();
 export const createUserDocument = async (userAuth: any, additionalInfo = {}) => {
     const userDocRef = doc(db, 'users', userAuth.uid);
     const userSnapshot = await getDoc(userDocRef);
-    console.log(userSnapshot.exists());
+  
     if (!userSnapshot.exists()) {
         const {displayName, email} = userAuth;
         const createdAt = new Date();
@@ -63,3 +63,5 @@ export const signInUserWithEmailAndPassword = async (email: string, password: st
 }
 
 export const signOutUser = () => signOut(auth);
+
+export const onAuthStateChangedListener = (callback: any) => onAuthStateChanged(auth, callback);
