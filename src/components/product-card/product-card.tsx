@@ -9,7 +9,7 @@ const ProductCard = (props: { item: IItem }) => {
       <img src={imageUrl} alt={`${name}`} />
       <Footer>
         <Name>{name}</Name>
-        <Price>{price}</Price>
+        <Price>&#163;{price}</Price>
         <Button>Add To Cart</Button>
       </Footer>
     </Container>

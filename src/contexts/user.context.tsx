@@ -1,5 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ReactNode, createContext, useState, useEffect } from "react";
+import {
+  ReactNode,
+  createContext,
+  useState,
+  useEffect,
+  SetStateAction,
+} from "react";
 import {
   createUserDocument,
   onAuthStateChangedListener,
@@ -19,12 +25,14 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   const value = { currentUser, setCurrentUser };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChangedListener((user) => {
-      if (user) {
-        createUserDocument(user);
+    const unsubscribe = onAuthStateChangedListener(
+      (user: SetStateAction<null>) => {
+        if (user) {
+          createUserDocument(user);
+        }
+        setCurrentUser(user);
       }
-      setCurrentUser(user);
-    });
+    );
 
     return unsubscribe;
   }, []);
