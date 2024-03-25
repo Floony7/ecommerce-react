@@ -1,13 +1,18 @@
 import { IItem } from "../../shop-data";
-import "./product-card.styles";
+import { Container, Footer, Name, Price, Button } from "./product-card.styles";
 
 const ProductCard = (props: { item: IItem }) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { name, price, imgURL } = props.item;
+  const { name, price, imageUrl } = props.item;
   return (
-    <section>
-      {name} costs {price}
-    </section>
+    <Container>
+      <img src={imageUrl} alt={`${name}`} />
+      <Footer>
+        <Name>{name}</Name>
+        <Price>{price}</Price>
+        <Button>Add To Cart</Button>
+      </Footer>
+    </Container>
   );
 };
 
