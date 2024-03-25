@@ -51,13 +51,14 @@ export const createUserDocument = async (userAuth: any, additionalInfo = {}) => 
 }
 
 export const createAuthUserWithEmailAndPassword = async (email: string, password: string) => {
-    if (!email || ! password) return;
+    if (!email || !password) return;
 
-    return await createUserWithEmailAndPassword(auth, email, password);
+    const userCred = await createUserWithEmailAndPassword(auth, email, password);
+    return userCred.user;
 }
 
 export const signInUserWithEmailAndPassword = async (email: string, password: string) => {
-    if (!email || ! password) return;
+    if (!email || !password) return;
 
     return await signInWithEmailAndPassword(auth, email, password);
 }
