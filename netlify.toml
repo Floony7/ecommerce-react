@@ -1,0 +1,7 @@
+# Build settings
+[build]
+  # Command to build your project
+  command = "npm run build"
+
+  # Directory to deploy after building
+  publish = "build/"
