@@ -12,10 +12,12 @@ import {
 } from "./navigation.styles";
 import { UserContext } from "../../contexts/user.context";
 import CartIcon from "../../components/cart-icon/cart-icon";
+import CartDropdown from "../../components/cart-dropdown/cart-dropdown";
+import { CartContext } from "../../contexts/cart.context";
 
 const Navigation = () => {
   const { currentUser } = useContext(UserContext);
-  console.log(currentUser);
+  const { isCartOpen } = useContext(CartContext);
   // const handleSignOut = async () => {
   //   await signOutUser();
   //   setCurrentUser(null);
@@ -47,6 +49,7 @@ const Navigation = () => {
             <CartIcon />
           </NavLinks>
         </NavInner>
+        {isCartOpen ? <CartDropdown /> : null}
       </Navbar>
       <Main>
         <Outlet />
