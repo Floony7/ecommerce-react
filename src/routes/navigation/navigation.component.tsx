@@ -11,6 +11,7 @@ import {
   Navbar,
 } from "./navigation.styles";
 import { UserContext } from "../../contexts/user.context";
+import CartIcon from "../../components/cart-icon/cart-icon";
 
 const Navigation = () => {
   const { currentUser } = useContext(UserContext);
@@ -43,6 +44,7 @@ const Navigation = () => {
             )}
 
             {/* <Link to="/sign-up">Sign Up</Link> */}
+            <CartIcon />
           </NavLinks>
         </NavInner>
       </Navbar>

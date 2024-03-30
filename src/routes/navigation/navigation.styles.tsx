@@ -21,6 +21,9 @@ export const Navbar = styled.div`
 Navbar.displayName = "Navbar";
 
 export const NavLinks = styled.nav`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
   margin-right: 2rem;
 `;
 

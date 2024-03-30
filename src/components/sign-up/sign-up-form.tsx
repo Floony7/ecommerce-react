@@ -35,6 +35,7 @@ const SignUpForm = () => {
       setError([]);
       setFormFields(defaultFormState);
     } catch (error) {
+      setFormFields(defaultFormState);
       setError((prev) => [...prev, (error as AuthError).message]);
     }
   };
