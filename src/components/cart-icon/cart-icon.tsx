@@ -1,16 +1,15 @@
 import { useContext } from "react";
 import { Container, BagIcon, Counter } from "./cart-icon.styles";
-import { CartContext, SHOW_CART } from "../../contexts/cart.context";
+import { CartContext } from "../../contexts/cart.context";
 
 const CartIcon = () => {
-  const { isCartOpen, dispatch } = useContext(CartContext);
-
-  const toggleShow = () => dispatch({ type: SHOW_CART, payload: !isCartOpen });
+  const { setIsCartOpen, totalQuantity } = useContext(CartContext);
+  const toggleShow = () => setIsCartOpen((prev) => !prev);
 
   return (
     <Container onClick={toggleShow}>
       <BagIcon />
-      <Counter>0</Counter>
+      <Counter>{totalQuantity}</Counter>
     </Container>
   );
 };

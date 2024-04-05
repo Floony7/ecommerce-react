@@ -1,11 +1,4 @@
-
-
-export interface IItem {
-  id: number,
-  name: string,
-  imageUrl: string,
-  price: number,
-}
+import { IItem } from "./contexts/cart.context";
 
 export type ShopData = {
   title: string;
